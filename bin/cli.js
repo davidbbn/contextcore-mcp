@@ -17,6 +17,8 @@
 //                         (Account -> Integrations -> Generate token)
 //   CONTEXTCORE_API_URL   optional — base URL of the ContextCore deployment
 
+import { readFileSync } from 'node:fs';
+
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
@@ -24,11 +26,16 @@ import {
   CallToolRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 
-const DEFAULT_API_URL = 'https://context-os.babavc.com';
+const DEFAULT_API_URL = 'https://contextcore.md';
 const MCP_ROUTE = '/mcp';
 const JSON_RPC_VERSION = '2.0';
 const SERVER_NAME = 'contextcore-mcp';
-const SERVER_VERSION = '0.0.1';
+
+// Read from the manifest rather than restating it — a hardcoded copy silently
+// reports a stale version to every client after the next bump.
+const { version: SERVER_VERSION } = JSON.parse(
+  readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+);
 
 // CONTEXTOS_* are the pre-rename names, still honoured so existing configs
 // keep working.

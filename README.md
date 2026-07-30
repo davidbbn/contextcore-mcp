@@ -31,7 +31,7 @@ In ContextCore, open **Account → Integrations → Generate token** and copy it
 {
   "mcpServers": {
     "contextcore": {
-      "url": "https://context-os.babavc.com/mcp",
+      "url": "https://contextcore.md/mcp",
       "headers": { "Authorization": "Bearer ${env:CONTEXTCORE_TOKEN}" }
     }
   }
@@ -67,7 +67,7 @@ Ask your agent things like *"Load the context for my Loop project"* or *"What's 
 | Env var | Required | Default | Description |
 |---------|----------|---------|-------------|
 | `CONTEXTCORE_TOKEN` | yes | — | Personal Access Token from ContextCore |
-| `CONTEXTCORE_API_URL` | no | `https://context-os.babavc.com` | ContextCore deployment base URL |
+| `CONTEXTCORE_API_URL` | no | `https://contextcore.md` | ContextCore deployment base URL |
 
 The pre-rename `CONTEXTOS_TOKEN` and `CONTEXTOS_API_URL` are still accepted.
 
