@@ -1,0 +1,38 @@
+{
+  "name": "contextcore-mcp",
+  "version": "0.0.1",
+  "description": "Model Context Protocol server that gives Cursor, Claude Code, and other agents secure read-only access to your ContextCore project context.",
+  "type": "module",
+  "bin": {
+    "contextcore-mcp": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidbbn/contextcore-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidbbn/contextcore-mcp/issues"
+  },
+  "homepage": "https://github.com/davidbbn/contextcore-mcp#readme",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "contextcore",
+    "cursor",
+    "claude-code",
+    "ai",
+    "context"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  }
+}
