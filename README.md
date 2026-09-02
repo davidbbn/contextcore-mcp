@@ -1,16 +1,45 @@
-# contextcore-mcp
+# ContextCore for Cursor
 
-Give Cursor, Claude Code, and any other MCP-aware agent **secure access to your ContextCore project context** — vision, audience, scope, tech decisions, rules, skills, risks, and open questions.
+Give Cursor **secure access to your ContextCore project context** — vision, audience, scope, tech decisions, rules, skills, risks, and open questions — plus write tools to propose updates.
 
-With a **read-scoped** token, the agent reads published context only. With a **write-scoped** token, it can also propose context, rules, skills, risks, and problems (landing in New for review unless you have direct-publish permission).
+With a **read-scoped** token or OAuth grant, the agent reads published context only. With **write** access, it can also propose context, rules, skills, risks, and problems (landing in **New** for review unless you have direct-publish permission).
 
-The agent gets exactly the context *you* can see. Access is enforced server-side by ContextCore's org/team/visibility federation — this client holds no authorization logic and can never widen access.
+The agent gets exactly the context *you* can see. Access is enforced server-side by ContextCore's org/team/visibility federation.
 
-> **Most people don't need this package.** ContextCore's gateway speaks MCP over HTTP, so any editor that supports remote MCP servers can connect with a URL and a token — no install. Use this package only if your client is stdio-only.
+## Cursor plugin
+
+This repo is the **ContextCore Cursor plugin** — skills, commands, and MCP server wiring in one installable bundle.
+
+**Marketplace listing is pending.** To test locally:
+
+1. Clone this repo (or symlink it) to `~/.cursor/plugins/local/contextcore`
+2. Open **Cursor → Settings → Plugins** and enable the local plugin
+3. Configure variables if needed (on-prem URLs, or a PAT for the stdio fallback)
+4. Type **`/contextcore-init`** in chat to run the first-run Initialize procedure
+
+The plugin ships:
+
+| Component | Path | Purpose |
+|-----------|------|---------|
+| Skill | `skills/contextcore/SKILL.md` | Full ContextCore playbook — read before you answer, propose updates |
+| Command | `commands/contextcore-init.md` | Human trigger for Initialize (connect → orient → bootstrap → handoff) |
+| MCP | `mcp.json` | Two servers — remote OAuth (primary) and stdio PAT fallback |
+
+Trust and security posture: [contextcore.md/trust](https://contextcore.md/trust)
+
+## MCP servers (dual path)
+
+**Primary — `contextcore` (remote / OAuth).** No token to paste. Cursor stores the MCP URL; the first request opens browser sign-in and consent. Configure **`CONTEXTCORE_MCP_URL`** (default `https://cloud.contextcore.md/mcp`).
+
+**Fallback — `contextcore-stdio`.** For headless setups or when you prefer a Personal Access Token. Set **`CONTEXTCORE_TOKEN`** and optionally **`CONTEXTCORE_API_URL`** (default `https://cloud.contextcore.md`). Uses the [`contextcore-mcp`](https://www.npmjs.com/package/contextcore-mcp) npm package via `npx`.
+
+If you only use OAuth, leave **`CONTEXTCORE_TOKEN`** unset and **disable** the `contextcore-stdio` server in Cursor MCP settings — otherwise it shows as failed until a token is configured.
+
+**On-prem:** point **`CONTEXTCORE_MCP_URL`** and **`CONTEXTCORE_API_URL`** at your instance (e.g. `https://onprem.example.com/mcp` and `https://onprem.example.com`).
 
 ## What your agent gets
 
-Read tools (default token):
+Read tools (default):
 
 | Tool | What it returns |
 |------|-----------------|
@@ -23,7 +52,7 @@ Read tools (default token):
 | `list_components` | Component list for a project |
 | `search_context` | Keyword matches across pieces, rules, skills, risks, and problems |
 
-Write tools (write-scoped token only):
+Write tools (write-scoped token or OAuth grant with propose changes):
 
 | Tool | What it does |
 |------|----------------|
@@ -35,28 +64,9 @@ Write tools (write-scoped token only):
 
 The tool list is fetched from the server at startup rather than baked in here, so it stays current without you upgrading the package.
 
-## Setup
+## Standalone stdio package
 
-### 1. Generate a token
-
-In ContextCore, open **Account → Integrations → Generate token** and copy it (shown once). Choose **read** or **read + write** scope when minting.
-
-### 2. Connect
-
-**Remote (preferred).** Works in Cursor and Claude Code without installing anything:
-
-```json
-{
-  "mcpServers": {
-    "contextcore": {
-      "url": "https://cloud.contextcore.md/mcp",
-      "headers": { "Authorization": "Bearer ${env:CONTEXTCORE_TOKEN}" }
-    }
-  }
-}
-```
-
-**Stdio (this package).** For clients that don't support remote servers:
+The **`contextcore-mcp`** npm package (this repo's `bin/cli.js`) is a pure JSON-RPC proxy for editors that only speak stdio MCP. The Cursor plugin includes it as the `contextcore-stdio` server; you can also install it directly:
 
 ```json
 {
@@ -70,31 +80,55 @@ In ContextCore, open **Account → Integrations → Generate token** and copy it
 }
 ```
 
-Cursor reads `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (per project); Claude Code reads `.mcp.json` in your project root, or:
+For sync/review/propose from the terminal, see [`contextcore-cli`](https://www.npmjs.com/package/contextcore-cli).
 
-```bash
-claude mcp add contextcore --env CONTEXTCORE_TOKEN=YOUR_TOKEN -- npx -y contextcore-mcp
+## Manual connect (no plugin)
+
+**Remote (OAuth).** Works in Cursor and Claude Code without installing anything:
+
+```json
+{
+  "mcpServers": {
+    "contextcore": {
+      "url": "https://cloud.contextcore.md/mcp"
+    }
+  }
+}
 ```
 
-### 3. Use it
+Mint a token in ContextCore under **Account → Integrations** if you need the stdio path or automation.
 
-Ask your agent things like *"Load the context for my ContextCore project"* or *"What's the target audience according to ContextCore?"*. It will call the tools automatically.
+## Sync workflow (maintainers)
+
+Playbook copy lives in the main ContextCore app repo (`context-os`), not here. **`skills/`** and **`commands/`** are generated — do not hand-edit them.
+
+1. Edit `src/constants/mcpPlaybook.js` in [context-os](https://github.com/davidbbn/context-os)
+2. From that repo, run:
+
+```bash
+npm run sync:cursor-plugin
+```
+
+That writes `skills/contextcore/SKILL.md`, `commands/contextcore-init.md`, and dogfoods the command into `context-os/.cursor/commands/`.
 
 ## Configuration
 
-| Env var | Required | Default | Description |
-|---------|----------|---------|-------------|
-| `CONTEXTCORE_TOKEN` | yes | — | Personal Access Token from ContextCore |
-| `CONTEXTCORE_API_URL` | no | `https://cloud.contextcore.md` | ContextCore cloud app base URL |
+| Variable / env | Required | Default | Description |
+|----------------|----------|---------|-------------|
+| `CONTEXTCORE_MCP_URL` | no | `https://cloud.contextcore.md/mcp` | Remote MCP gateway (plugin variable) |
+| `CONTEXTCORE_API_URL` | no | `https://cloud.contextcore.md` | App origin for stdio proxy |
+| `CONTEXTCORE_TOKEN` | stdio only | — | Personal Access Token from ContextCore |
 
-The pre-rename `CONTEXTOS_TOKEN` and `CONTEXTOS_API_URL` are still accepted.
+The pre-rename `CONTEXTOS_TOKEN` and `CONTEXTOS_API_URL` are still accepted by the stdio client.
 
 ## Security
 
-- The token maps to a single ContextCore user. Every read runs through the same federation gates as the web app — restricted context you can't see is never returned.
-- Write-scoped tokens can propose content; proposals default to the New tab unless your account has direct-publish permission on the project.
+- The token or OAuth grant maps to a single ContextCore user. Every read runs through the same federation gates as the web app — restricted context you can't see is never returned.
+- Write access can propose content; proposals default to the **New** tab unless your account has direct-publish permission on the project.
 - Only a SHA-256 hash of your token is stored server-side. Revoke any token anytime from **Account → Integrations**.
-- Never commit your token. Reference it via an environment variable in your MCP config where possible.
+- Never commit your token. Use plugin variables or environment references in MCP config.
+
+See [contextcore.md/trust](https://contextcore.md/trust) for the full trust posture.
 
 ## License
 

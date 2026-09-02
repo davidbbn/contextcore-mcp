@@ -1,0 +1,39 @@
+{
+  "name": "contextcore",
+  "version": "1.0.0",
+  "description": "Read and propose project context from ContextCore — manifest, components, rules, risks, and the exportable Context Core.",
+  "author": {
+    "name": "ContextCore",
+    "email": "hello@babavc.com",
+    "url": "https://contextcore.md"
+  },
+  "homepage": "https://contextcore.md/docs/mcp",
+  "repository": "https://github.com/davidbbn/contextcore-mcp",
+  "license": "MIT",
+  "keywords": ["contextcore", "mcp", "context", "product", "agents", "documentation"],
+  "logo": "assets/logo.svg",
+  "skills": "skills",
+  "commands": "commands",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "CONTEXTCORE_MCP_URL": {
+        "type": "string",
+        "title": "MCP endpoint URL",
+        "description": "ContextCore MCP gateway (remote / OAuth path)",
+        "default": "https://cloud.contextcore.md/mcp"
+      },
+      "CONTEXTCORE_API_URL": {
+        "type": "string",
+        "title": "API base URL",
+        "description": "ContextCore app origin for the stdio proxy (on-prem: your instance URL)",
+        "default": "https://cloud.contextcore.md"
+      },
+      "CONTEXTCORE_TOKEN": {
+        "type": "string",
+        "title": "Personal Access Token",
+        "description": "Optional — only needed for the stdio fallback server; the remote server uses browser OAuth"
+      }
+    }
+  }
+}

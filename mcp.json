@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "contextcore": {
+      "url": "${CONTEXTCORE_MCP_URL}"
+    },
+    "contextcore-stdio": {
+      "command": "npx",
+      "args": ["-y", "contextcore-mcp"],
+      "env": {
+        "CONTEXTCORE_TOKEN": "${CONTEXTCORE_TOKEN}",
+        "CONTEXTCORE_API_URL": "${CONTEXTCORE_API_URL}"
+      }
+    }
+  }
+}
