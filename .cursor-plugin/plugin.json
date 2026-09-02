@@ -1,7 +1,7 @@
 {
   "name": "contextcore",
   "version": "1.0.0",
-  "description": "Read and propose project context from ContextCore — manifest, components, rules, risks, and the exportable Context Core.",
+  "description": "Cursor plugin: read and propose ContextCore project context. Claude Code users: MCP only — see EDITORS.md in repo.",
   "author": {
     "name": "ContextCore",
     "email": "hello@babavc.com",

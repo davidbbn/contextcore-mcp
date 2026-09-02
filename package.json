@@ -1,7 +1,7 @@
 {
   "name": "contextcore-mcp",
   "version": "0.1.0",
-  "description": "ContextCore MCP for Cursor — read product context, propose updates, OAuth remote + stdio PAT fallback, /contextcore-init command.",
+  "description": "Official ContextCore plugin for Cursor (MCP + skill + /contextcore-init). Same MCP gateway for Claude Code — see EDITORS.md. Stdio npm package for other editors.",
   "type": "module",
   "bin": {
     "contextcore-mcp": "bin/cli.js"
@@ -27,6 +27,7 @@
     "model-context-protocol",
     "contextcore",
     "cursor",
+    "cursor-plugin",
     "claude-code",
     "ai",
     "context"
