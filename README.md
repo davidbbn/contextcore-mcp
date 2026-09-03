@@ -14,7 +14,7 @@ The agent gets exactly the context *you* can see. Access is enforced server-side
 
 | Editor | Action |
 |--------|--------|
-| **Cursor** | [Add to Cursor](cursor://anysphere.cursor-deeplink/plugin/install?repo=davidbbn%2Fcontextcore-mcp) → connect MCP → `/contextcore-init` |
+| **Cursor** | [Add to Cursor](cursor://anysphere.cursor-deeplink/plugin/install?repo=babaVC%2Fcontextcore-mcp) → connect MCP → `/contextcore-init` |
 | **Claude Code** | `claude mcp add --transport http contextcore https://cloud.contextcore.md/mcp` → paste `Set up ContextCore and initialize it.` |
 | **Details** | [EDITORS.md](./EDITORS.md) |
 
@@ -22,9 +22,9 @@ The agent gets exactly the context *you* can see. Access is enforced server-side
 
 This repo **is** the ContextCore Cursor plugin — skills, commands, and MCP wiring in one installable bundle. Claude Code and other editors use the **same MCP gateway** but do **not** install the plugin bundle; see [EDITORS.md](./EDITORS.md).
 
-**Marketplace listing is pending.** To test locally:
+**Marketplace listing is pending.** Submit via [SUBMISSION.md](./SUBMISSION.md). To test locally:
 
-1. Clone this repo (or symlink it) to `~/.cursor/plugins/local/contextcore`
+1. Clone this repo to `~/.cursor/plugins/local/contextcore` (use `cp -R`, not symlinks — Cursor rejects external symlink targets)
 2. Open **Cursor → Customize → Plugins** and enable the local plugin
 3. Connect the **`contextcore`** MCP server (browser OAuth on first use)
 4. Configure variables if needed (on-prem URLs, or a PAT for the stdio fallback)

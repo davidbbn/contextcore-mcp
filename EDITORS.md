@@ -11,7 +11,7 @@ This repo serves **three audiences**. Pick the row that matches yours.
 
 ## Cursor — full plugin
 
-**[Add to Cursor](cursor://anysphere.cursor-deeplink/plugin/install?repo=davidbbn%2Fcontextcore-mcp)** or the button on [contextcore.md](https://contextcore.md).
+**[Add to Cursor](cursor://anysphere.cursor-deeplink/plugin/install?repo=babaVC%2Fcontextcore-mcp)** or the button on [contextcore.md](https://contextcore.md).
 
 Installs:
 

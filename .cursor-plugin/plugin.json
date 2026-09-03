@@ -1,14 +1,15 @@
 {
   "name": "contextcore",
+  "displayName": "ContextCore",
   "version": "1.0.0",
-  "description": "Cursor plugin: read and propose ContextCore project context. Claude Code users: MCP only — see EDITORS.md in repo.",
+  "description": "Product context for AI agents — MCP gateway, Initialize skill, and /contextcore-init. Browser OAuth; no token to paste.",
   "author": {
     "name": "ContextCore",
     "email": "hello@babavc.com",
     "url": "https://contextcore.md"
   },
   "homepage": "https://contextcore.md/docs/mcp",
-  "repository": "https://github.com/davidbbn/contextcore-mcp",
+  "repository": "https://github.com/babaVC/contextcore-mcp",
   "license": "MIT",
   "keywords": ["contextcore", "mcp", "context", "product", "agents", "documentation"],
   "logo": "assets/logo.svg",

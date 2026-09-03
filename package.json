@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidbbn/contextcore-mcp.git"
+    "url": "git+https://github.com/babaVC/contextcore-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/davidbbn/contextcore-mcp/issues"
+    "url": "https://github.com/babaVC/contextcore-mcp/issues"
   },
-  "homepage": "https://github.com/davidbbn/contextcore-mcp#readme",
+  "homepage": "https://github.com/babaVC/contextcore-mcp#readme",
   "keywords": [
     "mcp",
     "model-context-protocol",
