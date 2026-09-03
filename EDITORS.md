@@ -20,7 +20,7 @@ Installs:
 - ContextCore playbook skill (when to read, how to propose, Initialize procedure)
 - `/contextcore-init` slash command
 
-Marketplace listing is pending. Local test: copy this repo to `~/.cursor/plugins/local/contextcore` and reload Cursor.
+Marketplace listing submitted 2026-09-03 — awaiting review. Local test: copy this repo to `~/.cursor/plugins/local/contextcore` and reload Cursor.
 
 ## Claude Code — MCP only
 

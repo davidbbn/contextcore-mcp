@@ -4,6 +4,8 @@ Repo: `https://github.com/babaVC/contextcore-mcp`
 
 Plugin name: **contextcore** (manifest `name`; display name **ContextCore**)
 
+**Status:** Submitted to both targets **2026-09-03** — awaiting review.
+
 ## Pre-submit checklist
 
 - [x] Repo under **babaVC** org (official home)
@@ -12,16 +14,19 @@ Plugin name: **contextcore** (manifest `name`; display name **ContextCore**)
 - [x] Command at `commands/contextcore-init.md` with frontmatter
 - [x] `mcp.json` — remote OAuth server + optional stdio fallback
 - [x] MIT license, README, trust link (contextcore.md/trust)
+- [x] Marketplace logo — `assets/logo-marketplace.png` (512×512, background plate)
 - [ ] Local test: copy to `~/.cursor/plugins/local/contextcore`, reload Cursor
 - [ ] Connect **`contextcore`** MCP → browser OAuth → consent
 - [ ] Run **`/contextcore-init`** end-to-end
 
 ## Submit
 
-| Target | URL | What to paste |
-|--------|-----|---------------|
-| **Official marketplace** | https://cursor.com/marketplace/publish | `https://github.com/babaVC/contextcore-mcp` |
-| **Cursor Directory** | https://cursor.directory/plugins/new | Same repo + one-liner from README |
+| Target | URL | Status |
+|--------|-----|--------|
+| **Official marketplace** | https://cursor.com/marketplace/publish | Submitted 2026-09-03 |
+| **Cursor Directory** | https://cursor.directory/plugins/new | Submitted 2026-09-03 |
+
+Logotype URL used: `https://raw.githubusercontent.com/babaVC/contextcore-mcp/main/assets/logo-marketplace.png`
 
 ### Suggested listing copy
 

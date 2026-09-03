@@ -22,7 +22,7 @@ The agent gets exactly the context *you* can see. Access is enforced server-side
 
 This repo **is** the ContextCore Cursor plugin — skills, commands, and MCP wiring in one installable bundle. Claude Code and other editors use the **same MCP gateway** but do **not** install the plugin bundle; see [EDITORS.md](./EDITORS.md).
 
-**Marketplace listing is pending.** Submit via [SUBMISSION.md](./SUBMISSION.md). To test locally:
+**Submitted to Cursor Marketplace and Cursor Directory (2026-09-03) — awaiting review.** See [SUBMISSION.md](./SUBMISSION.md). To test locally before listing goes live:
 
 1. Clone this repo to `~/.cursor/plugins/local/contextcore` (use `cp -R`, not symlinks — Cursor rejects external symlink targets)
 2. Open **Cursor → Customize → Plugins** and enable the local plugin
