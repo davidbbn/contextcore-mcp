@@ -12,7 +12,7 @@
   "repository": "https://github.com/babaVC/contextcore-mcp",
   "license": "MIT",
   "keywords": ["contextcore", "mcp", "context", "product", "agents", "documentation"],
-  "logo": "assets/logo.svg",
+  "logo": "assets/logo-marketplace.svg",
   "skills": "skills",
   "commands": "commands",
   "variables": {
